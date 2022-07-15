@@ -6,7 +6,7 @@ set(SOURCES
         main.cpp
         ./webserver/webserver.cpp
         ./http/http_conn.cpp
-        ./timer/Timer.cpp
+        ./timer/TimerLst.cpp
         ./Utils/Utils.cpp
         )
 

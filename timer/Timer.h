@@ -10,16 +10,18 @@
 #define TIMER_H
 
 #include <netinet/in.h>
-#include <time.h>
+#include <ctime>
 #include <exception>
 #include <queue>
 #include <memory>
+#include <vector>
 
 using std::priority_queue;
 using std::shared_ptr;
 using std::make_shared;
+using std::vector;
 
-cosnt int CLIENT_DATA_BUFFER_SIZE = 1024;
+static const int CLIENT_DATA_BUFFER_SIZE = 1024;
 class Util_timer;
 
 struct client_data
@@ -137,7 +139,7 @@ public:
 public:
     void add_timer(Util_timer* timer) {
         if (!timer) return;
-        pq.push(make_shared(timer));
+        pq.push(shared_ptr<Util_timer>(timer));
     }
 
     void del_timer(Util_timer* timer) {
@@ -164,7 +166,7 @@ public:
     bool empty() const {return pq.empty();}
     
     void tick() {
-        Util_timer* tmp = pq.top();
+        shared_ptr<Util_timer> tmp = pq.top();
         time_t cur = time(nullptr);
         while (!pq.empty()) {
             if (!tmp) break;
