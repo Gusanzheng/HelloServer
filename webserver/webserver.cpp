@@ -100,13 +100,13 @@ void WebServer::eventLoop()
             printf("%s", "epoll failure");
             break;
         }
-        printf("number = %d\n", number);
+        //printf("number = %d\n", number);
         for (int i = 0; i < number; i++)
         {
             int sockfd = events[i].data.fd;
             bool t1 = sockfd == m_pipefd[0];
             bool t2 = events[i].events & EPOLLIN;
-            printf("events[i].events & EPOLLIN == true? %d\n", t2);
+            //printf("events[i].events & EPOLLIN == true? %d\n", t2);
             //处理新到的客户连接
             if (sockfd == m_listenfd)
             {
@@ -125,7 +125,7 @@ void WebServer::eventLoop()
             //处理信号
             else if ((sockfd == m_pipefd[0]) && (events[i].events & EPOLLIN))
             {
-                printf("处理信号signal,删除非活动连接\n");
+                //printf("处理信号signal,删除非活动连接\n");
                 bool flag = dealwithsignal(timeout, stop_server);
                 if (false == flag)
                     printf("%s", "dealclientdata failure");

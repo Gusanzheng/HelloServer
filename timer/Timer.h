@@ -165,19 +165,19 @@ public:
 
     bool empty() const {return pq.empty();}
     
-    void tick() {
-        shared_ptr<Util_timer> tmp = pq.top();
-        time_t cur = time(nullptr);
-        while (!pq.empty()) {
-            if (!tmp) break;
-            if (tmp->expire > cur) break;   //还没到期
-            if (arr[0]->cb_func != nullptr) {   //到期了，且回调函数有效
-                arr[0]->cb_func(arr[0]->user_data);
-        }
-        pop_timer();    //删除到期的根，生成新的根
-        tmp = pq.top();
-    }
-}
+//    void tick() {
+//        shared_ptr<Util_timer> tmp = pq.top();
+//        time_t cur = time(nullptr);
+//        while (!pq.empty()) {
+//            if (!tmp) break;
+//            if (tmp->expire > cur) break;   //还没到期
+//            if (arr[0]->cb_func != nullptr) {   //到期了，且回调函数有效
+//                arr[0]->cb_func(arr[0]->user_data);
+//        }
+//        pop_timer();    //删除到期的根，生成新的根
+//        tmp = pq.top();
+//    }
+//}
 
 private:
     //重写仿函数
